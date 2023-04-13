@@ -119,5 +119,5 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_event_loop_create_default());
     ESP_ERROR_CHECK(example_connect());
 
-    xTaskCreate(tcp_client_task, "tcp_client", 4096, "192.168.1.6", 5, NULL);
+    xTaskCreate(tcp_client_task, "tcp_client", 4096, NULL, 5, NULL);
 }
