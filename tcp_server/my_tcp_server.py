@@ -24,8 +24,8 @@ while True:
         data = conn.recv(BUFFER_SIZE)
         if not data:
             break
-        print("received data:", data.decode())
-        fp.write(data.decode() + "\n")
+        #print("received data:", data.decode())
+        fp.write(data.decode())
     except socket.timeout:
         print("Socket timed out, closing connection")
         break

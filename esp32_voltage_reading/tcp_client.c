@@ -78,31 +78,33 @@ static void tcp_client_task(void *pvParameters)
         }
         ESP_LOGI(TAG, "Successfully connected");
 
-        while (1) {
+        float time = 0.0;
+        for(int i=0; i<100; i++) {
             // Read ADC value
             uint32_t adc_reading = adc1_get_raw(ADC1_CHANNEL_0);
 
             // Convert ADC value to voltage
-            double voltage = (double)adc_reading * (3.3 / 4095.0);
+            double voltage = (double)adc_reading * (3300.0 / 4095.0);
 
             // Send voltage to server
             char voltage_string[32];
-            sprintf(voltage_string, "%.2f", voltage);
-
+            sprintf(voltage_string, "%.3f %.2f\n", time, voltage);
             err = send(sock, voltage_string, strlen(voltage_string), 0);
             if (err < 0) {
                 ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
             }
-
+            printf("Data sent: %s", voltage_string);
             //vTaskDelay(2000 / portTICK_PERIOD_MS);
-            // Wait 1 second
-            vTaskDelay(pdMS_TO_TICKS(1000));
+            // Wait 1 millisecond
+            time += 0.1;
+            vTaskDelay(pdMS_TO_TICKS(100));
         }
 
         if (sock != -1) {
             ESP_LOGE(TAG, "Shutting down socket and restarting...");
             shutdown(sock, 0);
             close(sock);
+            break;
         }
     }
     vTaskDelete(NULL);
