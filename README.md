@@ -17,3 +17,8 @@ Setting up the wifi connection:
 * Scroll down to `Wifi SSID` and input your wifi SSID.
 * Scroll down to `Wifi Password` and input your wifi password.
 * Save and Quit.
+
+## Graphing Libraries needed
+
+* run `pip install numpy`.
+* run `pip install matplotlib`
