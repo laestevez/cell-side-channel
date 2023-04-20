@@ -79,7 +79,7 @@ static void tcp_client_task(void *pvParameters)
         ESP_LOGI(TAG, "Successfully connected");
 
         float time = 0.0;
-        for(int i=0; i<100; i++) {
+        for(int i=0; i<200; i++) {
             // Read ADC value
             uint32_t adc_reading = adc1_get_raw(ADC1_CHANNEL_0);
 
@@ -96,8 +96,8 @@ static void tcp_client_task(void *pvParameters)
             printf("Data sent: %s", voltage_string);
             //vTaskDelay(2000 / portTICK_PERIOD_MS);
             // Wait 1 millisecond
-            time += 0.1;
-            vTaskDelay(pdMS_TO_TICKS(100));
+            time += 0.05;
+            vTaskDelay(pdMS_TO_TICKS(50));
         }
 
         if (sock != -1) {
