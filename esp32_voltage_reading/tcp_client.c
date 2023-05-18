@@ -78,26 +78,36 @@ static void tcp_client_task(void *pvParameters)
         }
         ESP_LOGI(TAG, "Successfully connected");
 
+        // Set sampling rate and period
+        const uint32_t sampling_rate = 100000; // 100 KHz
+        const float sampling_period = 1.0 / sampling_rate;
+
+        // Initialize time to 0
         float time = 0.0;
-        for(int i=0; i<200; i++) {
+
+        while(1)
+        {
             // Read ADC value
             uint32_t adc_reading = adc1_get_raw(ADC1_CHANNEL_0);
 
             // Convert ADC value to voltage
-            double voltage = (double)adc_reading * (3300.0 / 4095.0);
+            double voltage = (double)adc_reading * (3.30 / 4095.0);
 
-            // Send voltage to server
+            // Send voltage to server with timestamp
             char voltage_string[32];
-            sprintf(voltage_string, "%.3f %.2f\n", time, voltage);
+            sprintf(voltage_string, "%.5f %.5f\n", time, voltage);
             err = send(sock, voltage_string, strlen(voltage_string), 0);
-            if (err < 0) {
+            if (err < 0)
+            {
                 ESP_LOGE(TAG, "Error occurred during sending: errno %d", errno);
             }
-            printf("Data sent: %s", voltage_string);
-            //vTaskDelay(2000 / portTICK_PERIOD_MS);
-            // Wait 1 millisecond
-            time += 0.05;
-            vTaskDelay(pdMS_TO_TICKS(50));
+
+            //printf("time: %f", time);
+
+            time += sampling_period;
+
+            // Wait for next sample in milliseconds
+            vTaskDelay(pdMS_TO_TICKS(sampling_period * 1000));
         }
 
         if (sock != -1) {
