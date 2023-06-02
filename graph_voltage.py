@@ -6,7 +6,7 @@ FILENAME = "voltage.txt"
 
 # Read data from text file
 with open(FILENAME, 'r') as fp:
-    data = fp.readlines()
+    data = fp.readlines()[1:]
 
 # Convert data to numpy array
 data = np.array([list(map(float, x.strip().split())) for x in data])
@@ -16,11 +16,13 @@ time = data[:, 0]
 voltage = data[:, 1]
 
 # Apply moving mean filter
-window = 2500
-voltage2 = pd.Series(voltage).rolling(window).mean()
+window_size = 2500
+voltage_filtered = pd.Series(voltage).rolling(window_size).mean()
 
 # Plot data
-plt.plot(time, voltage2, "-b")
-plt.xlabel('Time (s)')
+#plt.plot(time, voltage, "-b")
+plt.plot(time, voltage_filtered, "-r")
+plt.xlabel('Time')
 plt.ylabel('Voltage (mV)')
+plt.legend()
 plt.show()
