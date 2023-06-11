@@ -10,6 +10,7 @@ Create project from the esp-idf example project named `TCP Client example`. This
 ## TCP server
 
 On a seperate terminal run the TCP server python script. Edit the IP and Port to your PCs info. Edit the filepath of where you want the data to be written.
+The python script passes a 4 digit pin as a command line argument, Then writes it at the top of the file when connected to the board.
 
 ## Configuring Wifi and TCP Client
 
