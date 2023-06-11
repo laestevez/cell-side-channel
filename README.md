@@ -22,3 +22,11 @@ Setting up the wifi connection:
 
 * run `pip install numpy`.
 * run `pip install matplotlib`
+
+## Parts List
+| Part      | URL |
+| ----------- | ----------- |
+| Microcontroller: ESP32-DEVKITC-DA      | https://www.digikey.com/short/ttn8v10n  |
+| USB Cable: CA-USB-AM-CM-3FT   | https://www.digikey.com/short/pr9v50qn  |
+| MBreadboard: PRT-12614     | https://www.digikey.com/en/products/detail/sparkfun-electronics/PRT-12614/17828082  |
+| Resistors: KNP1WSJR-52-0R1   | https://www.digikey.com/en/products/detail/yageo/KNP1WSJR-52-0R1/2812996  |
