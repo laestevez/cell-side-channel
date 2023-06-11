@@ -1,3 +1,8 @@
+## Setup
+* Look at `wiring.jpg` for a wiring diagram.
+* The USB-C wire was spliced with the ground wire being cut.
+* The wifi setup below uses VSCode ESP-IDF Extension.
+
 ## TCP Client
 
 Create project from the esp-idf example project named `TCP Client example`. This should set up the tcp so you don't have to do it manually.
