@@ -1,6 +1,7 @@
 ## Setup
-* Look at `wiring.jpg` for a wiring diagram.
+* Look at `wiring.png` for a wiring diagram.
 * The USB-C wire was spliced with the ground wire being cut.
+* The VP pin uses ADC1_CHANNEL0 which the code configures.
 * The wifi setup below uses VSCode ESP-IDF Extension.
 
 ## TCP Client
